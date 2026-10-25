@@ -18,16 +18,16 @@ Existe una aplicación funcional, buildless, con dos formas de ejecución:
 
 | Forma | Qué funciona |
 |---|---|
-| Sitio estático / Sites | Ensayo precalculado de una inferencia real sobre el archivo `plano.jpeg`, revisión, métricas, catálogo 3D, calibración y exportaciones. Para otras imágenes solo funciona el detector geométrico anterior. |
+| Sitio estático / GitHub Pages | Ensayo precalculado de una inferencia real sobre el archivo `plano.jpeg`, revisión, métricas, catálogo 3D, calibración y exportaciones. Para otras imágenes solo funciona el detector geométrico anterior. |
 | Servicio Python local | Sirve la misma interfaz y ejecuta los modelos CPU sobre imágenes nuevas; todo ocurre en el equipo del usuario. |
 
-**No existe todavía inferencia de IA en la nube.** El sitio de Sites es estático y no ejecuta el backend Python. Iniciar el motor local no transforma la URL publicada en un servicio de IA: para usarlo hay que abrir `http://127.0.0.1:4173`.
+**No existe todavía inferencia de IA en la nube.** GitHub Pages sirve archivos estáticos y no ejecuta el backend Python. Iniciar el motor local no transforma la URL publicada en un servicio de IA: para usarlo hay que abrir `http://127.0.0.1:4173`.
 
-La publicación existente es privada. Su URL, identidad, versión y deployment se conservan en la configuración local del checkout original de Sites; se omiten de esta copia pública. Para retomarla, consultar allí `.openai/hosting.json` y el estado del plugin Sites, conservando la audiencia del propietario.
+El usuario pidió eliminar la publicación de Sites y confirmó su eliminación permanente; se eliminó y luego eligió GitHub Pages. **No recrear Sites sin una nueva solicitud del usuario.** El modelador se publica en [GitHub Pages](https://paulsaac.github.io/Blueprint_builder/).
 
 El código estaba inicialmente en la subcarpeta local `app`, que es la raíz de trabajo de Sites. La importación inicial a GitHub se realiza como una instantánea pública revisada, porque Git CLI no tenía una credencial de escritura válida. El historial y la configuración privada de Sites permanecen en el checkout original. Un clon independiente de GitHub se conserva en la carpeta local `Blueprint_builder`, junto a `app`; en el clon los archivos operativos están directamente en la raíz, sin otra carpeta `app` dentro.
 
-**GitHub y Sites son destinos distintos: un push a GitHub no despliega Sites automáticamente.** La configuración privada de hosting no se publica en GitHub. Tampoco se debe subir el historial privado original sin una revisión específica de sus metadatos.
+GitHub Pages usa la rama `main`, carpeta `/ (root)`. Inicialmente mostraba el README porque faltaba un `index.html` en la raíz. Ahora ese archivo redirige a `./dist/`, conservando parámetros y fragmentos, con enlace y redirección HTML de respaldo. `.nojekyll` evita procesar el repositorio con Jekyll. Todas las dependencias de la aplicación usan rutas relativas; no mover ni duplicar los archivos de `dist/` para publicar. Los pushes a `main` actualizan Pages. La configuración privada de hosting anterior no se publica en GitHub; tampoco se debe subir el historial privado original sin revisar sus metadatos.
 
 ## 3. Progreso cronológico
 
@@ -187,7 +187,7 @@ La escala inicial supone un ancho total de imagen de 24 m. Calibrar con dos punt
 - `.venv/`, `models/`, `third_party/`, cachés, credenciales y archivos de runtime están excluidos. No subirlos al repositorio ni al paquete estático.
 - Three.js y OrbitControls están vendorizados, versión 0.180.0, con licencia MIT. Las fuentes web son opcionales y tienen fallback del sistema.
 
-Para continuar la publicación de Sites, recuperar su identidad desde la configuración privada local, mantener la audiencia y seguir el flujo de fuente/versiones del plugin Sites. Las credenciales se renuevan cuando haga falta y se mantienen en memoria/stdin, nunca en archivos o commits. El Git remoto del usuario y la fuente de Sites son destinos distintos, con historiales distintos en la importación inicial; verificar el checkout, rama y destino en cada operación. No forzar un push ni reemplazar el historial de Sites para hacerlos coincidir. En el clon GitHub, `origin` apunta a `Paulsaac/Blueprint_builder`; el checkout original `app` conserva el historial de publicación y los modelos locales. Las actualizaciones de documentación en GitHub no requieren alterar el sitio desplegado.
+Para mantener la publicación, trabajar en el clon GitHub cuyo `origin` apunta a `Paulsaac/Blueprint_builder` y comprobar el despliegue de Pages tras el push. El checkout original `app` conserva el historial anterior y los modelos locales; no confundirlo con el clon GitHub. Las credenciales se mantienen en memoria/stdin, nunca en archivos o commits. No forzar un push ni mezclar el historial privado anterior con el público.
 
 ## 9. Modelos, atribución y derechos
 
@@ -210,7 +210,7 @@ Para continuar la publicación de Sites, recuperar su identidad desde la configu
 ## 11. Primeros minutos del próximo agente
 
 1. Leer este documento, `README.md` y `reports/plano-evaluacion.md`.
-2. Inspeccionar `git status`, ramas y remotos; conservar cambios del usuario y la identidad de Sites.
+2. Inspeccionar `git status`, ramas y remotos; conservar cambios del usuario y la configuración de GitHub Pages. La publicación de Sites fue eliminada por solicitud expresa.
 3. Ejecutar `npm test` y abrir la vista estática. Iniciar el servicio local solo si el trabajo necesita inferencia.
 4. Confirmar el problema concreto que se va a mejorar y guardar una medición antes de cambiar algoritmos.
 5. Mantener anotación manual, predicción y baseline separados. Nunca completar una predicción con las anotaciones para aparentar mayor precisión.

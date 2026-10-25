@@ -2,6 +2,8 @@
 
 Repositorio: [Paulsaac/Blueprint_builder](https://github.com/Paulsaac/Blueprint_builder).
 
+**[Abrir el modelador en GitHub Pages](https://paulsaac.github.io/Blueprint_builder/)**.
+
 **Para continuar el trabajo con otro agente, leer primero [HANDOFF.md](HANDOFF.md)**: objetivos, progreso, arquitectura, experimentos, métricas, límites y próximos pasos. Las [capturas del progreso](docs/images/) incluyen el prototipo inicial y el ensayo actual.
 
 Al clonar este repositorio, los comandos se ejecutan en su raíz (`Blueprint_builder`). La subcarpeta `app` mencionada en la ruta de la máquina original corresponde a esta misma raíz, no a un directorio adicional dentro del clon.
@@ -10,7 +12,7 @@ Detección por categorías, comparación con anotaciones manuales y levantamient
 
 ## Probar
 
-La versión privada publicada incluye **el resultado precalculado de una ejecución real sobre el archivo plano.jpeg**. Se verifica la huella SHA-256 del archivo; renombrar otra imagen como plano.jpeg no reutiliza ese resultado. Las anotaciones manuales se cargan únicamente para el archivo correspondiente y permanecen separadas de la inferencia.
+La versión estática publicada incluye **el resultado precalculado de una ejecución real sobre el archivo plano.jpeg**. Se verifica la huella SHA-256 del archivo; renombrar otra imagen como plano.jpeg no reutiliza ese resultado. Las anotaciones manuales se cargan únicamente para el archivo correspondiente y permanecen separadas de la inferencia.
 
 - **Levantamiento 3D**: componentes de catálogo con alturas y orientación aproximadas.
 - **Detección 2D**: categorías, referencia manual o aciertos/omisiones/sobrantes. Se puede filtrar por categoría.
@@ -43,7 +45,15 @@ El instalador usa un entorno `.venv` aislado, PyTorch CPU y pesos públicos cuyo
 npm start
 ```
 
-La vista estática permite revisar el ensayo incluido sin instalar Python. En la publicación de Sites no se ejecuta Python: **para archivos nuevos, la IA requiere el servicio local**. Si falta ese servicio, las imágenes nuevas usan el detector geométrico y la interfaz lo indica. No se reutilizan predicciones de otro archivo ni se simula un análisis de IA.
+La vista estática permite revisar el ensayo incluido sin instalar Python. GitHub Pages no ejecuta el backend Python: **para archivos nuevos, la IA requiere el servicio local**. Si falta ese servicio, las imágenes nuevas usan el detector geométrico y la interfaz lo indica. No se reutilizan predicciones de otro archivo ni se simula un análisis de IA.
+
+### Publicar en GitHub Pages
+
+En **Settings → Pages → Build and deployment**, mantener **Deploy from a branch**, rama **main** y carpeta **/ (root)**. Cada push a esa rama actualiza la publicación.
+
+El `index.html` de la raíz abre `./dist/`, donde vive la aplicación completa. `.nojekyll` permite servir los archivos estáticos directamente. Las rutas del visor, los módulos de Three.js, el worker y los datos son relativas, por lo que funcionan bajo `/Blueprint_builder/dist/` sin un proceso de compilación.
+
+Si aparece documentación en lugar del visor, comprobar que el despliegue de Pages terminó para el último commit y recargar la página. También se puede abrir [el builder directamente](https://paulsaac.github.io/Blueprint_builder/dist/). La publicación anterior de Sites fue eliminada a petición del usuario; el hosting actual es GitHub Pages.
 
 ## Qué se implementó
 
