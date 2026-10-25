@@ -15,12 +15,15 @@ inference_lock = threading.Lock()
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,directory=str(ROOT/'dist'),**kwargs)
+    def end_headers(self):
+        # Development files must refresh together when editing buildless modules.
+        self.send_header('Cache-Control','no-store')
+        super().end_headers()
     def json(self,status,data):
         payload = json.dumps(data,ensure_ascii=False).encode('utf-8')
         self.send_response(status)
         self.send_header('Content-Type','application/json; charset=utf-8')
         self.send_header('Content-Length',str(len(payload)))
-        self.send_header('Cache-Control','no-store')
         self.end_headers()
         self.wfile.write(payload)
     def do_GET(self):

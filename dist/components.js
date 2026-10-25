@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { CATEGORY, bboxIou } from './evaluation.js';
+import { openingHeights } from './architecture.js';
 
 /** Approximate catalogue geometry; heights/orientation are not inferred. */
 export function buildComponents(objects, regions, width, height, scale, wallHeight) {
@@ -17,20 +18,21 @@ export function buildComponents(objects, regions, width, height, scale, wallHeig
       const region=regions.filter(r=>r.category===object.category).map(r=>({r,iou:bboxIou(r.bbox,bbox)})).sort((a,b)=>b.iou-a.iou)[0];
       if(region?.iou>.04) bbox=region.r.bbox;
     }
-    const [x0,y0,x1,y1]=bbox, w=(x1-x0)*scale,d=(y1-y0)*scale;
+    const [x0,y0,x1,y1]=bbox, w=(object.placement?.widthPixels??(x1-x0))*scale,d=(object.placement?.depthPixels??(y1-y0))*scale;
     item.position.set(((x0+x1)/2-width/2)*scale,.02,((y0+y1)/2-height/2)*scale);
-    const color=material(CATEGORY[object.category]?.color??'#a4ab9b');
+    item.rotation.y=object.placement?.rotation??0;
+    const color=material(object.placement?'#98a89a':CATEGORY[object.category]?.color??'#a4ab9b');
     if(object.category==='bed') {
       addBox(item,w,.24,d,0,.12,0,wood);
       addBox(item,w*.96,.22,d*.96,0,.35,0,white);
-      const wide=w>d;
+      const wide=object.placement?false:w>d;
       addBox(item,wide?w*.72:w*.96,.055,wide?d*.96:d*.72,wide?w*.10:0,.485,wide?0:d*.10,fabric);
       addBox(item,wide?w*.20:w*.84,.10,wide?d*.84:d*.20,wide?-w*.36:0,.51,wide?0:-d*.36,white);
       addBox(item,wide?.09:w,.65,wide?d:.09,wide?-w/2:0,.33,wide?0:-d/2,wood);
     } else if(object.category==='sofa') {
       addBox(item,w,.32,d,0,.18,0,color);
       addBox(item,w*.88,.16,d*.82,0,.42,0,fabric);
-      if(w>=d) {
+      if(object.placement||w>=d) {
         addBox(item,w,.45,d*.15,0,.55,-d*.42,color);
         addBox(item,w*.09,.36,d,-w*.45,.5,0,color);addBox(item,w*.09,.36,d,w*.45,.5,0,color);
       } else {
@@ -60,6 +62,35 @@ export function buildComponents(objects, regions, width, height, scale, wallHeig
       addBox(item,w,h,d,0,h/2,0,white);
       addBox(item,w*.7,.025,d*.66,0,h+.013,0,object.category==='stove'?dark:material('#acc2c3'));
     } else addBox(item,w,.65,d,0,.325,0,color);
+    group.add(item);
+  }
+  return group;
+}
+
+export function buildArchitecturalOpenings(openings,width,height,scale,wallHeight) {
+  const group=new THREE.Group();
+  const frame=new THREE.MeshStandardMaterial({color:'#e9e6dc',roughness:.72});
+  const wood=new THREE.MeshStandardMaterial({color:'#b79a71',roughness:.8});
+  const glass=new THREE.MeshStandardMaterial({color:'#a8c4c8',transparent:true,opacity:.38,roughness:.18,depthWrite:false});
+  const box=(parent,w,h,d,x,y,z,material)=>{
+    const mesh=new THREE.Mesh(new THREE.BoxGeometry(Math.max(.01,w),Math.max(.01,h),Math.max(.01,d)),material);
+    mesh.position.set(x,y,z);mesh.castShadow=material!==glass;mesh.receiveShadow=true;parent.add(mesh);
+  };
+  for(const opening of openings) {
+    const item=new THREE.Group(),along=(opening.from+opening.to)/2,w=(opening.to-opening.from)*scale;
+    const {bottom,top}=openingHeights(opening.category,wallHeight),h=top-bottom,depth=opening.thickness*scale+.025;
+    item.userData={category:opening.category,objectIds:opening.objectIds,wallId:opening.wallId};
+    item.position.set(((opening.axis==='h'?along:opening.c)-width/2)*scale,.012,((opening.axis==='h'?opening.c:along)-height/2)*scale);
+    item.rotation.y=opening.axis==='h'?0:Math.PI/2;
+    const border=Math.min(.055,w*.12);
+    box(item,border,h,depth,-w/2+border/2,bottom+h/2,0,frame);
+    box(item,border,h,depth,w/2-border/2,bottom+h/2,0,frame);
+    box(item,w,border,depth,0,top-border/2,0,frame);
+    if(opening.category==='window') {
+      box(item,w,border,depth,0,bottom+border/2,0,frame);
+      box(item,w-2*border,h-2*border,.025,0,bottom+h/2,0,glass);
+      box(item,border,h,.035,0,bottom+h/2,0,frame);
+    } else box(item,w-2*border,h-border,.035,0,bottom+(h-border)/2,0,wood);
     group.add(item);
   }
   return group;

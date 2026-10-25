@@ -1,4 +1,4 @@
-# Blueprint Builder · Ensayo 02
+# Blueprint Builder · Ensayo 04
 
 Repositorio: [Paulsaac/Blueprint_builder](https://github.com/Paulsaac/Blueprint_builder).
 
@@ -9,6 +9,39 @@ Repositorio: [Paulsaac/Blueprint_builder](https://github.com/Paulsaac/Blueprint_
 Al clonar este repositorio, los comandos se ejecutan en su raíz (`Blueprint_builder`). La subcarpeta `app` mencionada en la ruta de la máquina original corresponde a esta misma raíz, no a un directorio adicional dentro del clon.
 
 Detección por categorías, comparación con anotaciones manuales y levantamiento 3D sobre `plano.jpeg`. El visor conserva Three.js y añade dos motores de reconocimiento ejecutados localmente en CPU.
+
+## Auditoría de puertas y ventanas
+
+El **Ensayo 04** revisa las 15 propuestas que no tenían asociación de muro. Eran aberturas reales: nueve puertas y seis ventanas. La asociación depurada incorpora encuentros perpendiculares y apoyos cortos, agrupa fragmentos de la misma clase y excluye dos fragmentos conflictivos. La predicción de IA permanece intacta.
+
+En el ejemplo activo, las propuestas sin soporte pasan de **15 a 0**, y los cuerpos de abertura de **21 a 31**. **Las seis ventanas revisadas todavía necesitan ajustes de extensión o alineación**. Una ventana vertical de cocina sigue dividida en dos cuerpos por la máscara; por eso 31 cuerpos no equivalen a 31 aberturas correctas. Se añadieron a la referencia dos puertas omitidas, con revisión visual del agente y sin validación independiente.
+
+Usar **Asociación de aberturas → Anterior / Depurada** para comparar en 3D. En **Evaluación → Cada caso, sobre el plano** se puede abrir cada propuesta ampliada en 2D y descargar la auditoría. Ver [el registro completo, métricas y limitaciones](reports/aberturas-04.md).
+
+```powershell
+.\.venv\Scripts\python.exe backend/opening_reference_review.py
+node backend/build_opening_audit.mjs
+npm test
+```
+
+## Reconstrucción depurada
+
+El **Ensayo 03** añade limpieza conservadora de muros, aberturas vinculadas con vanos reales, orientación de mobiliario según paredes próximas y una presentación más limpia. En **Geometría 3D** se puede alternar con la detección original; en **Detección 2D → Muros · antes y después** se comparan los contornos sobre la imagen.
+
+La escala medida con dos puntos se conserva en este navegador para el mismo archivo, identificado por hash. La imagen de ejemplo se calibró manualmente en la prueba local con la cota superior visible de **20,96 m**; esa medición no se incorpora como una regla para otros planos. Las alturas siguen siendo supuestos de catálogo.
+
+El ejemplo activo usa **1280 × 749 píxeles**, con una inferencia ligada al hash de ese archivo. Sus contornos pasan de **3.146 a 1.110 vértices**. La referencia manual se trasladó mediante alineación entre resoluciones y recibió una revisión visual parcial en el Ensayo 04; requiere revisión independiente. Ver [el informe de reconstrucción](reports/reconstruccion-03.md).
+
+El ensayo anterior de 724 × 424 se conserva en `dist/data/archive/724x424`, junto a su imagen en `dist/assets/archive`. Sus métricas y sus pruebas son históricas. Aumentar la resolución cambió los resultados de ambos motores; la precisión y cobertura de objetos no mejoraron en esta ejecución, por lo que hay que revisar la referencia transferida y ajustar el detector sobre más datos.
+
+```powershell
+npm test
+node backend/build_reconstruction_report.mjs
+```
+
+Los resultados de reconstrucción se exportan por separado en JSON versión 3, junto a la medición de escala y los supuestos. Para actualizar GitHub Pages con estos cambios hay que publicar el commit correspondiente en `main`.
+
+Para preparar una nueva resolución del mismo plano, `backend/prepare_sample.py` comprueba correspondencias con la imagen histórica antes de trasladar anotaciones, genera píxeles de prueba y actualiza `dist/sample.js` con URLs que incluyen la huella del archivo. La inferencia se ejecuta por separado y nunca lee esas anotaciones. `backend/create_reference.py` solo regenera la referencia histórica, evitando asignar las coordenadas antiguas al hash de una imagen nueva.
 
 ## Probar
 

@@ -5,197 +5,183 @@
   "rows": [
     {
       "category": "door",
-      "tp": 10,
-      "fp": 3,
-      "fn": 2,
-      "predicted": 13,
-      "expected": 12,
-      "precision": 0.7692307692307693,
-      "recall": 0.8333333333333334,
+      "tp": 9,
+      "fp": 7,
+      "fn": 5,
+      "predicted": 16,
+      "expected": 14,
+      "precision": 0.5625,
+      "recall": 0.6428571428571429,
       "matches": [
         {
-          "predictionId": "semantic-22",
-          "referenceId": "ref-door-1",
-          "iou": 0.6344827586206897
-        },
-        {
           "predictionId": "semantic-23",
-          "referenceId": "ref-door-2",
-          "iou": 0.8518518518518519
+          "referenceId": "ref-door-13",
+          "iou": 0.5351239669421488
         },
         {
           "predictionId": "semantic-24",
-          "referenceId": "ref-door-4",
-          "iou": 0.5605095541401274
+          "referenceId": "ref-door-1",
+          "iou": 0.6889694863452476
         },
         {
           "predictionId": "semantic-25",
-          "referenceId": "ref-door-5",
-          "iou": 0.676923076923077
+          "referenceId": "ref-door-2",
+          "iou": 0.73999303680783
         },
         {
           "predictionId": "semantic-26",
-          "referenceId": "ref-door-6",
-          "iou": 0.704
+          "referenceId": "ref-door-4",
+          "iou": 0.503645435552954
         },
         {
-          "predictionId": "semantic-27",
-          "referenceId": "ref-door-3",
-          "iou": 0.7692307692307693
+          "predictionId": "semantic-28",
+          "referenceId": "ref-door-6",
+          "iou": 0.550722839954781
         },
         {
           "predictionId": "semantic-29",
-          "referenceId": "ref-door-8",
-          "iou": 0.8076923076923077
+          "referenceId": "ref-door-3",
+          "iou": 0.8107803859707268
         },
         {
           "predictionId": "semantic-30",
-          "referenceId": "ref-door-7",
-          "iou": 0.5714285714285714
-        },
-        {
-          "predictionId": "semantic-33",
-          "referenceId": "ref-door-9",
-          "iou": 0.7058823529411765
+          "referenceId": "ref-door-12",
+          "iou": 0.6308412699963611
         },
         {
           "predictionId": "semantic-34",
+          "referenceId": "ref-door-10",
+          "iou": 0.8049818970548452
+        },
+        {
+          "predictionId": "semantic-37",
           "referenceId": "ref-door-11",
-          "iou": 0.5052631578947369
+          "iou": 0.7152186851380122
         }
       ],
       "falsePositiveIds": [
-        "semantic-28",
+        "semantic-22",
+        "semantic-27",
         "semantic-31",
-        "semantic-32"
+        "semantic-32",
+        "semantic-33",
+        "semantic-35",
+        "semantic-36"
       ],
       "falseNegativeIds": [
-        "ref-door-10",
-        "ref-door-12"
+        "ref-door-5",
+        "ref-door-7",
+        "ref-door-8",
+        "ref-door-9",
+        "ref-door-14"
       ]
     },
     {
       "category": "window",
-      "tp": 12,
-      "fp": 9,
-      "fn": 4,
+      "tp": 8,
+      "fp": 13,
+      "fn": 8,
       "predicted": 21,
       "expected": 16,
-      "precision": 0.5714285714285714,
-      "recall": 0.75,
+      "precision": 0.38095238095238093,
+      "recall": 0.5,
       "matches": [
         {
-          "predictionId": "semantic-2",
+          "predictionId": "semantic-1",
           "referenceId": "ref-window-3",
-          "iou": 0.7616926503340757
+          "iou": 0.636555612881197
         },
         {
-          "predictionId": "semantic-3",
-          "referenceId": "ref-window-4",
-          "iou": 0.6260869565217392
-        },
-        {
-          "predictionId": "semantic-4",
-          "referenceId": "ref-window-5",
-          "iou": 0.624765478424015
-        },
-        {
-          "predictionId": "semantic-5",
+          "predictionId": "semantic-2",
           "referenceId": "ref-window-6",
-          "iou": 0.8304498269896193
+          "iou": 0.713500278798001
+        },
+        {
+          "predictionId": "semantic-6",
+          "referenceId": "ref-window-4",
+          "iou": 0.5137507893175166
+        },
+        {
+          "predictionId": "semantic-7",
+          "referenceId": "ref-window-5",
+          "iou": 0.6083801135560879
         },
         {
           "predictionId": "semantic-10",
           "referenceId": "ref-window-7",
-          "iou": 0.7054409005628518
+          "iou": 0.692026984938004
         },
         {
-          "predictionId": "semantic-13",
+          "predictionId": "semantic-11",
+          "referenceId": "ref-window-13",
+          "iou": 0.5664417984243159
+        },
+        {
+          "predictionId": "semantic-12",
           "referenceId": "ref-window-8",
-          "iou": 0.7237762237762237
-        },
-        {
-          "predictionId": "semantic-14",
-          "referenceId": "ref-window-9",
-          "iou": 0.6103896103896104
-        },
-        {
-          "predictionId": "semantic-15",
-          "referenceId": "ref-window-10",
-          "iou": 0.5217391304347826
-        },
-        {
-          "predictionId": "semantic-16",
-          "referenceId": "ref-window-11",
-          "iou": 0.7272727272727273
+          "iou": 0.5103706779884924
         },
         {
           "predictionId": "semantic-18",
           "referenceId": "ref-window-14",
-          "iou": 0.6388888888888888
-        },
-        {
-          "predictionId": "semantic-20",
-          "referenceId": "ref-window-15",
-          "iou": 0.8047445255474452
-        },
-        {
-          "predictionId": "semantic-21",
-          "referenceId": "ref-window-16",
-          "iou": 0.6120218579234973
+          "iou": 0.6162169417727134
         }
       ],
       "falsePositiveIds": [
-        "semantic-1",
-        "semantic-6",
-        "semantic-7",
+        "semantic-3",
+        "semantic-4",
+        "semantic-5",
         "semantic-8",
         "semantic-9",
-        "semantic-11",
-        "semantic-12",
+        "semantic-13",
+        "semantic-14",
+        "semantic-15",
+        "semantic-16",
         "semantic-17",
-        "semantic-19"
+        "semantic-19",
+        "semantic-20",
+        "semantic-21"
       ],
       "falseNegativeIds": [
         "ref-window-1",
         "ref-window-2",
+        "ref-window-9",
+        "ref-window-10",
+        "ref-window-11",
         "ref-window-12",
-        "ref-window-13"
+        "ref-window-15",
+        "ref-window-16"
       ]
     },
     {
       "category": "bed",
-      "tp": 4,
+      "tp": 3,
       "fp": 0,
-      "fn": 3,
-      "predicted": 4,
+      "fn": 4,
+      "predicted": 3,
       "expected": 7,
       "precision": 1,
-      "recall": 0.5714285714285714,
+      "recall": 0.42857142857142855,
       "matches": [
         {
-          "predictionId": "prediction-16",
+          "predictionId": "prediction-13",
           "referenceId": "ref-bed-3",
-          "iou": 0.8133194807382153
+          "iou": 0.8060632351672525
         },
         {
-          "predictionId": "prediction-19",
-          "referenceId": "ref-bed-6",
-          "iou": 0.905444959609375
-        },
-        {
-          "predictionId": "prediction-33",
-          "referenceId": "ref-bed-2",
-          "iou": 0.5115148010578656
-        },
-        {
-          "predictionId": "prediction-34",
+          "predictionId": "prediction-21",
           "referenceId": "ref-bed-1",
-          "iou": 0.6215886415608259
+          "iou": 0.6056425419438214
+        },
+        {
+          "predictionId": "prediction-29",
+          "referenceId": "ref-bed-6",
+          "iou": 0.7751861127664063
         }
       ],
       "falsePositiveIds": [],
       "falseNegativeIds": [
+        "ref-bed-2",
         "ref-bed-4",
         "ref-bed-5",
         "ref-bed-7"
@@ -203,39 +189,34 @@
     },
     {
       "category": "sofa",
-      "tp": 3,
-      "fp": 5,
-      "fn": 1,
-      "predicted": 8,
+      "tp": 2,
+      "fp": 4,
+      "fn": 2,
+      "predicted": 6,
       "expected": 4,
-      "precision": 0.375,
-      "recall": 0.75,
+      "precision": 0.3333333333333333,
+      "recall": 0.5,
       "matches": [
         {
           "predictionId": "prediction-1",
           "referenceId": "ref-sofa-3",
-          "iou": 0.7662700000000017
+          "iou": 0.7181850952865244
         },
         {
-          "predictionId": "prediction-15",
+          "predictionId": "prediction-10",
           "referenceId": "ref-sofa-4",
-          "iou": 0.788160497835497
-        },
-        {
-          "predictionId": "prediction-18",
-          "referenceId": "ref-sofa-2",
-          "iou": 0.8731687499999999
+          "iou": 0.7870861482047029
         }
       ],
       "falsePositiveIds": [
-        "prediction-5",
-        "prediction-14",
+        "prediction-18",
         "prediction-20",
-        "prediction-25",
-        "prediction-30"
+        "prediction-31",
+        "prediction-44"
       ],
       "falseNegativeIds": [
-        "ref-sofa-1"
+        "ref-sofa-1",
+        "ref-sofa-2"
       ]
     },
     {
@@ -251,19 +232,19 @@
         {
           "predictionId": "prediction-7",
           "referenceId": "ref-table-2",
-          "iou": 0.9263216477695044
+          "iou": 0.8635363197700303
         },
         {
-          "predictionId": "prediction-31",
+          "predictionId": "prediction-27",
           "referenceId": "ref-table-4",
-          "iou": 0.6670333313788301
+          "iou": 0.6163878347980859
         }
       ],
       "falsePositiveIds": [
-        "prediction-28",
-        "prediction-29",
-        "prediction-36",
-        "prediction-39"
+        "prediction-16",
+        "prediction-34",
+        "prediction-35",
+        "prediction-36"
       ],
       "falseNegativeIds": [
         "ref-table-1",
@@ -271,20 +252,20 @@
       ]
     }
   ],
-  "wallIou": 0.5733153778422334,
-  "wallIntersectionPixels": 11069,
-  "wallUnionPixels": 19307,
+  "wallIou": 0.5949077748499952,
+  "wallIntersectionPixels": 37478,
+  "wallUnionPixels": 62998,
   "totals": {
-    "tp": 31,
-    "fp": 21,
-    "fn": 12,
-    "precision": 0.5961538461538461,
-    "recall": 0.7209302325581395
+    "tp": 24,
+    "fp": 28,
+    "fn": 21,
+    "precision": 0.46153846153846156,
+    "recall": 0.5333333333333333
   },
   "note": "Una imagen con referencia manual inicial; no estima precisión sobre otros planos.",
-  "baselineWallIou": 0.7051745565472828,
-  "imageSha256": "1eaaa77811f87c7a623468c69f533e6f1221fea1f1112e60d2ca82315ed78f90",
-  "referenceStatus": "initial-review",
+  "baselineWallIou": 0.5674556745567456,
+  "imageSha256": "9f3f598dd2db7f26fa7374c0b5bbbf7764e70bda9febb9aca65243fe3389f049",
+  "referenceStatus": "transferred-initial-review",
   "modelProvenance": {
     "kind": "neural-inference",
     "device": "cpu",

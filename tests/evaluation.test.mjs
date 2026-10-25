@@ -23,8 +23,8 @@ test('different image hashes never produce comparison metrics',()=>{
   assert.equal(evaluatePrediction({imageSha256:'a',width:10,height:10},{imageSha256:'b',width:10,height:10}),null);
 });
 test('checked-in inference remains independent of manual reference and has measurable errors',()=>{
-  const prediction=JSON.parse(readFileSync(new URL('../dist/data/plano-prediction.json',import.meta.url)));
-  const reference=JSON.parse(readFileSync(new URL('../dist/data/plano-reference.json',import.meta.url)));
+  const prediction=JSON.parse(readFileSync(new URL('../dist/data/archive/724x424/plano-prediction.json',import.meta.url)));
+  const reference=JSON.parse(readFileSync(new URL('../dist/data/archive/724x424/plano-reference.json',import.meta.url)));
   const before=JSON.stringify(prediction);
   const raw=evaluatePrediction(prediction,reference,.35);
   assert.ok(raw.totals.tp>0);assert.ok(raw.totals.fp>0);assert.ok(raw.totals.fn>0);

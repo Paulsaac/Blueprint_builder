@@ -8,7 +8,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-image = ROOT / 'dist/assets/plano.jpeg'
+image = ROOT / 'dist/assets/archive/plano-724x424.jpeg'
+if hashlib.sha256(image.read_bytes()).hexdigest() != '1eaaa77811f87c7a623468c69f533e6f1221fea1f1112e60d2ca82315ed78f90':
+    raise ValueError('Estas coordenadas pertenecen solo al archivo histórico de 724 × 424. Para otra resolución, usar prepare_sample.py y revisar el registro.')
 walls = []
 def wall(axis, c, intervals, thickness=5):
     for start, end in intervals:
@@ -60,6 +62,6 @@ reference = dict(
     walls=walls, objects=objects,
     assumptions=dict(wallHeightMeters=2.7, doorHeightMeters=2.1, windowSillMeters=.9, windowHeightMeters=1.2, furnitureHeights='Valores de catálogo aproximados; no inferidos del plano.'),
 )
-target = ROOT / 'dist/data/plano-reference.json'
+target = ROOT / 'dist/data/archive/724x424/plano-reference.json'
 target.write_text(json.dumps(reference, ensure_ascii=False, indent=2), encoding='utf-8')
 print(f'Reference: {len(walls)} wall segments, {len(objects)} objects; sha256={reference["imageSha256"]}')
