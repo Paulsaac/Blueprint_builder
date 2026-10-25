@@ -1,0 +1,19 @@
+node_modules/
+.sites-runtime/
+.sites-checkout/
+tests/*-detail.png
+tests/plan.rgba
+tests/detection.json
+*.log
+
+.venv/
+models/
+third_party/
+__pycache__/
+
+Ultralytics/
+backend/__pycache__/
+
+# Private hosting metadata is kept locally, excluded from GitHub snapshots.
+.openai/hosting.json
+*.tar.gz
